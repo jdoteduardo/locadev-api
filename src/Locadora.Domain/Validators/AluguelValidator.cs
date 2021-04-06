@@ -52,6 +52,13 @@ namespace Locadora.Domain.Validators
 
                 .ScalePrecision(10, 2)
                 .WithMessage("Valor fora do intervalo.");
+
+            RuleFor(x => x.Ativo)
+                .NotEmpty()
+                .WithMessage("O ano não pode ser vazio.")
+
+                .NotNull()
+                .WithMessage("O ano não pode ser nulo.");
         }
     }
 }

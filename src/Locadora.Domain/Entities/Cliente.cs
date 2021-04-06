@@ -1,3 +1,4 @@
+using Locadora.Core.Exceptions;
 using Locadora.Domain.Validators;
 using System;
 
@@ -48,7 +49,7 @@ namespace Locadora.Domain.Entities
                     _errors.Add(error.ErrorMessage);
                 }
 
-                throw new Exception("Alguns campos estão inválidos, por favor corrija-os." + _errors[0]);
+                throw new DomainException("Alguns campos estão inválidos, por favor corrija-os.", _errors);
             }
 
             return true;

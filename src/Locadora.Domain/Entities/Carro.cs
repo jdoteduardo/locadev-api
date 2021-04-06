@@ -1,4 +1,5 @@
 using FluentValidation;
+using Locadora.Core.Exceptions;
 using Locadora.Domain.Validators;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,18 @@ namespace Locadora.Domain.Entities
         public int Ano { get; private set; }
         public string Modelo { get; private set; }
         public string Marca { get; private set; }
+        public bool Ativo { get; set; }
 
         //EF
         protected Carro() { }
 
-        public Carro(string placa, int ano, string modelo, string marca) 
+        public Carro(string placa, int ano, string modelo, string marca, bool ativo) 
         {
             this.Placa = placa;
             this.Ano = ano;
             this.Modelo = modelo;
             this.Marca = marca;
+            this.Ativo = ativo;
             _errors = new List<string>();
         }
 
@@ -48,6 +51,12 @@ namespace Locadora.Domain.Entities
             Validate();
         }
 
+        public void AlterarAtivo(bool ativo)
+        {
+            Ativo = ativo;
+            Validate();
+        }
+
         public override bool Validate()
         {
             var validator = new CarroValidator();
@@ -60,7 +69,7 @@ namespace Locadora.Domain.Entities
                     _errors.Add(error.ErrorMessage);
                 }
 
-                throw new Exception("Alguns campos estão inválidos, por favor corrija-os." + _errors[0]);
+                throw new DomainException("Alguns campos estão inválidos, por favor corrija-os.", _errors);
             }
 
             return true;

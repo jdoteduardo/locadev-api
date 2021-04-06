@@ -59,6 +59,13 @@ namespace Locadora.Domain.Validators
 
                 .MaximumLength(50)
                 .WithMessage("A marca deve ter no máximo 50 caracteres.");
+
+            RuleFor(x => x.Ativo)
+                .NotEmpty()
+                .WithMessage("O ano não pode ser vazio.")
+
+                .NotNull()
+                .WithMessage("O ano não pode ser nulo.");
         }
     }
 }

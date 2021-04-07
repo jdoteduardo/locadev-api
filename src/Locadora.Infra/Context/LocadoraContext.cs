@@ -20,6 +20,7 @@ namespace Locadora.Infra.Context
 
         public DbSet<Carro> Carros { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Aluguel> Alugueis { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

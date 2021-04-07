@@ -1,6 +1,7 @@
 using Locadora.Core.Exceptions;
 using Locadora.Domain.Validators;
 using System;
+using System.Collections.Generic;
 
 namespace Locadora.Domain.Entities
 {
@@ -12,7 +13,7 @@ namespace Locadora.Domain.Entities
         public Cliente Cliente { get; private set; }
         public DateTime DataAluguel { get; private set; }
         public decimal Valor { get; private set; }
-        public bool Ativo { get; private set; }
+        public bool Ativo { get; set; }
 
         //EF
         protected Aluguel() { }
@@ -26,6 +27,9 @@ namespace Locadora.Domain.Entities
             DataAluguel = dataAluguel;
             Valor = valor;
             Ativo = ativo;
+            _errors = new List<string>();
+
+            Validate();
         }
 
         public void AlterarIdCarro(long idCarro)

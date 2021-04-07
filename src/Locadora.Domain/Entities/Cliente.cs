@@ -1,6 +1,7 @@
 using Locadora.Core.Exceptions;
 using Locadora.Domain.Validators;
 using System;
+using System.Collections.Generic;
 
 namespace Locadora.Domain.Entities
 {
@@ -10,13 +11,22 @@ namespace Locadora.Domain.Entities
         public string Cpf { get; private set; }
         public string Email { get; private set; }
         public string Contato { get; private set; }
+        public bool Ativo { get; set; }
+
+        protected Cliente()
+        {
+
+        }
 
         public Cliente(string nomeCompleto, string cpf, string email, string contato) 
         {
-            this.NomeCompleto = nomeCompleto;
-            this.Cpf = cpf;
-            this.Email = email;
-            this.Contato = contato;
+            NomeCompleto = nomeCompleto;
+            Cpf = cpf;
+            Email = email;
+            Contato = contato;
+            _errors = new List<string>();
+
+            Validate();
         }
 
         public void AlterarNomeCompleto(string nomeCompleto)

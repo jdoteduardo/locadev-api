@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,17 +34,6 @@ namespace Locadora.Infra.Repositories
             await _context.SaveChangesAsync();
 
             return obj;
-        }
-
-        public virtual async Task Excluir(long id)
-        {
-            var obj = await ObterPorId(id);
-
-            if(obj != null)
-            {
-                _context.Remove(id);
-                await _context.SaveChangesAsync();
-            }
         }
 
         public virtual async Task<T> ObterPorId(long id)

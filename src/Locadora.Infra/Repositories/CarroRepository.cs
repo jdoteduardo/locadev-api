@@ -19,6 +19,18 @@ namespace Locadora.Infra.Repositories
             _context = context;
         }
 
+        public virtual async Task Cancelar(long id)
+        {
+            var obj = await ObterPorId(id);
+
+            if (obj != null)
+            {
+                var carro = _context.Carros.SingleOrDefault(x => x.Id == id);
+                carro.Ativo = false;
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public virtual async Task<Carro> ObterPorAno(int ano)
         {
             var anoCarro = await _context.Carros
@@ -54,6 +66,20 @@ namespace Locadora.Infra.Repositories
                                    (
                                         x =>
                                             x.Modelo.ToLower() == modelo.ToLower()
+                                    )
+                                    .AsNoTracking()
+                                    .ToListAsync();
+
+            return modeloCarro.FirstOrDefault();
+        }
+
+        public virtual async Task<Carro> ObterPorPlaca(string placa)
+        {
+            var modeloCarro = await _context.Carros
+                                   .Where
+                                   (
+                                        x =>
+                                            x.Placa.ToLower() == placa.ToLower()
                                     )
                                     .AsNoTracking()
                                     .ToListAsync();

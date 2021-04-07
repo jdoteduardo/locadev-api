@@ -9,6 +9,6 @@ namespace Locadora.Infra.Interfaces
 {
     public interface IAluguelRepository : IBaseRepository<Aluguel>
     {
-
+        Task Cancelar(long id);
     }
 }

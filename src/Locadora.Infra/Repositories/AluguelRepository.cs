@@ -17,5 +17,17 @@ namespace Locadora.Infra.Repositories
         {
             _context = context;
         }
+
+        public virtual async Task Cancelar(long id)
+        {
+            var obj = await ObterPorId(id);
+
+            if (obj != null)
+            {
+                var aluguel = _context.Alugueis.SingleOrDefault(x => x.Id == id);
+                aluguel.Ativo = false;
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

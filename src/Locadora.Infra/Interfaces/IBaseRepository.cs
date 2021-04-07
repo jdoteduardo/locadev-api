@@ -1,5 +1,7 @@
 ﻿using Locadora.Domain.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Locadora.Infra.Interfaces
@@ -8,7 +10,6 @@ namespace Locadora.Infra.Interfaces
     {
         Task<T> Criar(T obj);
         Task<T> Atualizar(T obj);
-        Task Excluir(long id);
         Task<T> ObterPorId(long id);
         Task<List<T>> ObterTodos();
     }

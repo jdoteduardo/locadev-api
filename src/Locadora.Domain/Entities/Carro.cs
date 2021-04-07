@@ -19,12 +19,14 @@ namespace Locadora.Domain.Entities
 
         public Carro(string placa, int ano, string modelo, string marca, bool ativo) 
         {
-            this.Placa = placa;
-            this.Ano = ano;
-            this.Modelo = modelo;
-            this.Marca = marca;
-            this.Ativo = ativo;
+            Placa = placa;
+            Ano = ano;
+            Modelo = modelo;
+            Marca = marca;
+            Ativo = ativo;
             _errors = new List<string>();
+
+            Validate();
         }
 
         public void AlterarPlaca(string placa)

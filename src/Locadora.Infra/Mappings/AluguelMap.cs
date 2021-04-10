@@ -35,14 +35,10 @@ namespace Locadora.Infra.Mappings
                 .HasColumnName("valor");
 
             // Relacionamentos
-            builder.HasOne(x => x.Carro)
+            builder
+                .HasOne(o => o.Carro)
                 .WithOne()
-                .HasForeignKey<Aluguel>(x => x.IdCarro)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(x => x.Cliente)
-                .WithOne()
-                .HasForeignKey<Aluguel>(x => x.IdCliente)
+                .HasForeignKey<Aluguel>(o => o.IdCarro)
                 .OnDelete(DeleteBehavior.Restrict);
 
         }

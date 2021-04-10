@@ -22,7 +22,7 @@ namespace Locadora.Infra.Repositories
 
         public virtual async Task<T> Atualizar(T obj)
         {
-            _context.Add(obj);
+            _context.Entry(obj).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return obj;
@@ -30,7 +30,7 @@ namespace Locadora.Infra.Repositories
 
         public virtual async Task<T> Criar(T obj)
         {
-            _context.Entry(obj).State = EntityState.Modified;
+            _context.Add(obj);
             await _context.SaveChangesAsync();
 
             return obj;
@@ -51,6 +51,17 @@ namespace Locadora.Infra.Repositories
             return await _context.Set<T>()
                 .AsNoTracking()
                 .ToListAsync();
+        }
+
+        public virtual async Task Remover(long id)
+        {
+            var obj = await ObterPorId(id);
+
+            if (obj != null)
+            {
+                _context.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

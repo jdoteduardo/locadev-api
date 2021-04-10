@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,16 +20,12 @@ namespace Locadora.Infra.Repositories
             _context = context;
         }
 
-        public virtual async Task Cancelar(long id)
+        public virtual async Task<List<Carro>> ObterDisponiveis()
         {
-            var obj = await ObterPorId(id);
-
-            if (obj != null)
-            {
-                var carro = _context.Carros.SingleOrDefault(x => x.Id == id);
-                carro.Ativo = false;
-                await _context.SaveChangesAsync();
-            }
+            return await _context.Set<Carro>()
+                .AsNoTracking()
+                .Where(x => x.Status.Equals(0))
+                .ToListAsync();
         }
 
         public virtual async Task<Carro> ObterPorAno(int ano)
@@ -99,6 +96,18 @@ namespace Locadora.Infra.Repositories
                                     .ToListAsync();
 
             return modelos;
+        }
+
+        public override async Task Remover(long id)
+        {
+            var obj = await ObterPorId(id);
+
+            if (obj != null)
+            {
+                var carro = _context.Carros.SingleOrDefault(x => x.Id == id);
+                carro.RetirarCarro();
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

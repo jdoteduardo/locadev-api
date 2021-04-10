@@ -10,7 +10,6 @@ namespace Locadora.Infra.Interfaces
 {
     public interface IClienteRepository : IBaseRepository<Cliente>
     {
-        Task Cancelar(long id);
         Task<Cliente> ObterPorNome(string nomeCompleto);
         Task<Cliente> ObterPorEmail(string email);
         Task<List<Cliente>> PesquisarPorEmail(string email);

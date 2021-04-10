@@ -38,27 +38,14 @@ namespace Locadora.Domain.Validators
                 .WithMessage("A data do aluguel não pode ser vazia.")
 
                 .NotNull()
-                .WithMessage("A data do aluguel não pode ser nula.")
-
-                .Equal(DateTime.Now)
-                .WithMessage("A data do aluguel precisa ser a de hoje.");
+                .WithMessage("A data do aluguel não pode ser nula.");
 
             RuleFor(x => x.Valor)
                 .NotEmpty()
                 .WithMessage("O valor não pode ser vazio.")
 
                 .NotNull()
-                .WithMessage("O valor não pode ser nulo.")
-
-                .ScalePrecision(10, 2)
-                .WithMessage("Valor fora do intervalo.");
-
-            RuleFor(x => x.Ativo)
-                .NotEmpty()
-                .WithMessage("O ano não pode ser vazio.")
-
-                .NotNull()
-                .WithMessage("O ano não pode ser nulo.");
+                .WithMessage("O valor não pode ser nulo.");
         }
     }
 }

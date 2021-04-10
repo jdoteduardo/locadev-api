@@ -11,7 +11,7 @@ namespace Locadora.Domain.Entities
         public string Cpf { get; private set; }
         public string Email { get; private set; }
         public string Contato { get; private set; }
-        public bool Ativo { get; set; }
+        public List<Aluguel> Alugueis { get; private set; }
 
         protected Cliente()
         {
@@ -24,20 +24,9 @@ namespace Locadora.Domain.Entities
             Cpf = cpf;
             Email = email;
             Contato = contato;
+            Alugueis = new List<Aluguel>();
             _errors = new List<string>();
 
-            Validate();
-        }
-
-        public void AlterarNomeCompleto(string nomeCompleto)
-        {
-            NomeCompleto = nomeCompleto;
-            Validate();
-        }
-        
-        public void AlterarCpf(string cpf)
-        {
-            Cpf = cpf;
             Validate();
         }
         

@@ -29,9 +29,9 @@ namespace Locadora.Infra.Mappings
 
             builder.Property(x => x.Cpf)
                 .IsRequired()
-                .IsFixedLength()
+                .HasMaxLength(14)
                 .HasColumnName("Cpf")
-                .HasColumnType("VARCHAR(11)");
+                .HasColumnType("VARCHAR(14)");
 
             builder.Property(x => x.Email)
                 .IsRequired()
@@ -41,9 +41,16 @@ namespace Locadora.Infra.Mappings
 
             builder.Property(x => x.Contato)
                 .IsRequired()
-                .IsFixedLength()
+                .HasMaxLength(15)
                 .HasColumnName("Contato")
                 .HasColumnType("VARCHAR(15)");
+
+            // Relacionamentos
+            builder
+                .HasMany(c => c.Alugueis)
+                .WithOne(o => o.Cliente)
+                .HasForeignKey(o => o.IdCliente)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

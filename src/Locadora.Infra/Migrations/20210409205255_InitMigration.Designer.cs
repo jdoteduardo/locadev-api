@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Locadora.Infra.Migrations
 {
     [DbContext(typeof(LocadoraContext))]
-    [Migration("20210407015652_UpdateAluguel")]
-    partial class UpdateAluguel
+    [Migration("20210409205255_InitMigration")]
+    partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,9 +27,6 @@ namespace Locadora.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("DataAluguel")
                         .ValueGeneratedOnAdd()
@@ -54,8 +51,7 @@ namespace Locadora.Infra.Migrations
                     b.HasIndex("IdCarro")
                         .IsUnique();
 
-                    b.HasIndex("IdCliente")
-                        .IsUnique();
+                    b.HasIndex("IdCliente");
 
                     b.ToTable("Aluguel");
                 });
@@ -71,9 +67,6 @@ namespace Locadora.Infra.Migrations
 
                     b.Property<int>("Ano")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Marca")
                         .IsRequired()
@@ -93,6 +86,12 @@ namespace Locadora.Infra.Migrations
                         .HasColumnName("Placa")
                         .IsFixedLength(true);
 
+                    b.Property<DateTime>("RegistradoEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Carro");
@@ -107,20 +106,17 @@ namespace Locadora.Infra.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Contato")
                         .IsRequired()
+                        .HasMaxLength(15)
                         .HasColumnType("VARCHAR(15)")
-                        .HasColumnName("Contato")
-                        .IsFixedLength(true);
+                        .HasColumnName("Contato");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(11)")
-                        .HasColumnName("Cpf")
-                        .IsFixedLength(true);
+                        .HasMaxLength(14)
+                        .HasColumnType("VARCHAR(14)")
+                        .HasColumnName("Cpf");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -148,14 +144,19 @@ namespace Locadora.Infra.Migrations
                         .IsRequired();
 
                     b.HasOne("Locadora.Domain.Entities.Cliente", "Cliente")
-                        .WithOne()
-                        .HasForeignKey("Locadora.Domain.Entities.Aluguel", "IdCliente")
+                        .WithMany("Alugueis")
+                        .HasForeignKey("IdCliente")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Carro");
 
                     b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("Locadora.Domain.Entities.Cliente", b =>
+                {
+                    b.Navigation("Alugueis");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,53 +10,35 @@ namespace Locadora.Domain.Entities
     {
         public string Placa { get; private set; }
         public int Ano { get; private set; }
-        public string Modelo { get; private set; }
         public string Marca { get; private set; }
-        public bool Ativo { get; set; }
+        public string Modelo { get; private set; }
+        public CarroStatusEnum Status { get; private set; }
+        public DateTime RegistradoEm { get; private set; }
 
         //EF
         protected Carro() { }
 
-        public Carro(string placa, int ano, string modelo, string marca, bool ativo) 
+        public Carro(string placa, int ano, string modelo, string marca) 
         {
             Placa = placa;
             Ano = ano;
             Modelo = modelo;
             Marca = marca;
-            Ativo = ativo;
+            Status = CarroStatusEnum.Disponivel;
+            RegistradoEm = DateTime.Now;
             _errors = new List<string>();
 
             Validate();
         }
 
-        public void AlterarPlaca(string placa)
-        {
-            Placa = placa;
-            Validate();
-        }
-        
-        public void AlterarAno(int ano)
+        public void Atualizar(int ano)
         {
             Ano = ano;
-            Validate();
         }
 
-        public void AlterarModelo(string modelo)
+        public void RetirarCarro()
         {
-            Modelo = modelo;
-            Validate();
-        }
-
-        public void AlterarMarca(string marca)
-        {
-            Marca = marca;
-            Validate();
-        }
-
-        public void AlterarAtivo(bool ativo)
-        {
-            Ativo = ativo;
-            Validate();
+            Status = CarroStatusEnum.Indisponivel;
         }
 
         public override bool Validate()

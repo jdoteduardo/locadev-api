@@ -57,11 +57,6 @@ namespace Locadora.Services.Services
             return _mapper.Map<CarroDTO>(criarCarro);
         }
 
-        public async Task Cancelar(long id)
-        {
-            await _carroRepository.Cancelar(id);
-        }
-
         public async Task<CarroDTO> ObterPorAno(int ano)
         {
             var anoCarro = await _carroRepository.ObterPorAno(ano);
@@ -102,6 +97,11 @@ namespace Locadora.Services.Services
             var modelosCarros = await _carroRepository.PesquisarPorModelo(modelo);
 
             return _mapper.Map<List<CarroDTO>>(modelosCarros);
+        }
+
+        public async Task Remover(long id)
+        {
+            await _carroRepository.Remover(id);
         }
     }
 }

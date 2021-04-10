@@ -2,7 +2,7 @@
 
 namespace Locadora.Infra.Migrations
 {
-    public partial class UpdatePlaca : Migration
+    public partial class UpdateAluguel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

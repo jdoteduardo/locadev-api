@@ -10,6 +10,7 @@ namespace Locadora.Infra.Interfaces
     {
         Task<T> Criar(T obj);
         Task<T> Atualizar(T obj);
+        Task Remover(long id);
         Task<T> ObterPorId(long id);
         Task<List<T>> ObterTodos();
     }

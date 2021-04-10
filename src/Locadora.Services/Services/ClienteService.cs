@@ -55,11 +55,6 @@ namespace Locadora.Services.Services
             return _mapper.Map<ClienteDTO>(criarCliente);
         }
 
-        public async Task Cancelar(long id)
-        {
-            await _clienteRepository.Cancelar(id);
-        }
-
         public async Task<ClienteDTO> ObterPorEmail(string email)
         {
             var emailCliente = await _clienteRepository.ObterPorEmail(email);

@@ -24,7 +24,7 @@ namespace Locadora.Domain.Validators
                 .MinimumLength(3)
                 .WithMessage("O nome completo deve ter no mínimo 3 caracteres.")
 
-                .MaximumLength(60)
+                .MaximumLength(160)
                 .WithMessage("O nome completo deve ter no máximo 50 caracteres.");
 
             RuleFor(x => x.Cpf)
@@ -34,10 +34,10 @@ namespace Locadora.Domain.Validators
                 .NotNull()
                 .WithMessage("O CPF não pode ser nula.")
 
-                .Length(11)
-                .WithMessage("O campo deve conter 11 caracteres")
+                .MaximumLength(14)
+                .WithMessage("O campo deve conter no máximo 14 caracteres.")
 
-                .Matches(@"/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/")
+                .Matches(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$")
                 .WithMessage("CPF no formato errado.");
 
             RuleFor(x => x.Email)
@@ -63,10 +63,10 @@ namespace Locadora.Domain.Validators
                 .NotEmpty()
                 .WithMessage("O contato não pode ser vazio.")
 
-                .Length(11)
-                .WithMessage("O campo deve conter 11 caracteres")
+                .MaximumLength(15)
+                .WithMessage("O campo deve conter no máximo 15 caracteres.")
 
-                .Matches(@"^(\(11\) [9][0-9]{4}-[0-9]{4})|(\(1[2-9]\) [5-9][0-9]{3}-[0-9]{4})|(\([2-9][1-9]\) [5-9][0-9]{3}-[0-9]{4})$")
+                .Matches(@"^(\([0-9]{2}\))\s([9]{1})?([0-9]{4})-([0-9]{4})$")
                 .WithMessage("O contato informado não é válido.");
         }
     }

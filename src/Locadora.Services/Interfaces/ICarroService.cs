@@ -11,9 +11,9 @@ namespace Locadora.Services.Interfaces
     {
         Task<CarroDTO> Criar(CarroDTO carroDTO);
         Task<CarroDTO> Atualizar(CarroDTO carroDTO);
-        Task Cancelar(long id);
         Task<CarroDTO> ObterPorId(long id);
         Task<List<CarroDTO>> ObterTodos();
+        Task Remover(long id);
         Task<List<CarroDTO>> PesquisarPorModelo(string modelo);
         Task<CarroDTO> ObterPorModelo(string modelo);
         Task<CarroDTO> ObterPorMarca(string marca);

@@ -8,26 +8,25 @@ namespace Locadora.Services.DTO
 {
     public class AluguelDTO
     {
-        public long IdCarro { get; private set; }
-        public CarroDTO Carro { get; private set; }
-        public long IdCliente { get; private set; }
-        public ClienteDTO Cliente { get; private set; }
-        public DateTime DataAluguel { get; private set; }
-        public decimal Valor { get; private set; }
-        public bool Ativo { get; private set; }
+        public long Id { get; set; }
+        public long IdCarro { get; set; }
+        public CarroDTO Carro { get; set; }
+        public long IdCliente { get; set; }
+        public ClienteDTO Cliente { get; set; }
+        public DateTime DataAluguel { get; set; }
+        public decimal Valor { get; set; }
 
         public AluguelDTO()
         { }
 
-        public AluguelDTO(long idCarro, CarroDTO carro, long idCliente, ClienteDTO cliente, DateTime dataAluguel, decimal valor, bool ativo)
+        public AluguelDTO(long idCarro, CarroDTO carro, long idCliente, ClienteDTO cliente, decimal valor)
         {
             IdCarro = idCarro;
             Carro = carro;
             IdCliente = idCliente;
             Cliente = cliente;
-            DataAluguel = dataAluguel;
+            DataAluguel = DateTime.Now;
             Valor = valor;
-            Ativo = ativo;
         }
     }
 }

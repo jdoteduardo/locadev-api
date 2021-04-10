@@ -13,52 +13,26 @@ namespace Locadora.Domain.Entities
         public Cliente Cliente { get; private set; }
         public DateTime DataAluguel { get; private set; }
         public decimal Valor { get; private set; }
-        public bool Ativo { get; set; }
 
         //EF
         protected Aluguel() { }
 
-        public Aluguel(int idCarro, Carro carro, int idCliente, Cliente cliente, DateTime dataAluguel, decimal valor, bool ativo)
+        public Aluguel(int idCarro, Carro carro, int idCliente, Cliente cliente, decimal valor)
         {
             IdCarro = idCarro;
             Carro = carro;
             IdCliente = idCliente;
             Cliente = cliente;
-            DataAluguel = dataAluguel;
+            DataAluguel = DateTime.Now;
             Valor = valor;
-            Ativo = ativo;
             _errors = new List<string>();
 
-            Validate();
-        }
-
-        public void AlterarIdCarro(long idCarro)
-        {
-            IdCarro = idCarro;
-            Validate();
-        }
-
-        public void AlterarIdCliente(long idCliente)
-        {
-            IdCliente = idCliente;
-            Validate();
-        }
-
-        public void AlterarData(DateTime dataAluguel)
-        {
-            DataAluguel = dataAluguel;
             Validate();
         }
 
         public void AlterarValor(decimal valor)
         {
             Valor = valor;
-            Validate();
-        }
-
-        public void AlterarAtivo(bool ativo)
-        {
-            Ativo = ativo;
             Validate();
         }
 

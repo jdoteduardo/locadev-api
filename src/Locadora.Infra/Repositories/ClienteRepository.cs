@@ -28,18 +28,6 @@ namespace Locadora.Infra.Repositories
                 .ToListAsync();
         }
 
-        public virtual async Task Cancelar(long id)
-        {
-            var obj = await ObterPorId(id);
-
-            if (obj != null)
-            {
-                var cliente = _context.Clientes.SingleOrDefault(x => x.Id == id);
-                cliente.Ativo = false;
-                await _context.SaveChangesAsync();
-            }
-        }
-
         public virtual async Task<Cliente> ObterPorEmail(string email)
         {
             var emailCliente = await _context.Clientes

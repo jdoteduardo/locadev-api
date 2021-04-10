@@ -22,7 +22,7 @@ namespace Locadora.Domain.Validators
                 .WithMessage("A placa não pode ser nula.")
 
                 .Length(7)
-                .WithMessage("A placa deve conter 8 caracteres.")
+                .WithMessage("A placa deve conter 7 caracteres.")
 
                 .Matches(@"[a-zA-Z]{3}[0-9]{1}[a-zA-Z]{1}[0-9]{2}")
                 .WithMessage("Placa no formato errado.");
@@ -60,12 +60,12 @@ namespace Locadora.Domain.Validators
                 .MaximumLength(50)
                 .WithMessage("A marca deve ter no máximo 50 caracteres.");
 
-            RuleFor(x => x.Ativo)
+            RuleFor(x => x.RegistradoEm)
                 .NotEmpty()
-                .WithMessage("O ano não pode ser vazio.")
+                .WithMessage("O registro não pode ser vazio.")
 
                 .NotNull()
-                .WithMessage("O ano não pode ser nulo.");
+                .WithMessage("O registro não pode ser nulo.");
         }
     }
 }

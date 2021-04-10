@@ -12,7 +12,6 @@ namespace Locadora.Services.Interfaces
     {
         Task<ClienteDTO> Criar(ClienteDTO clienteDTO);
         Task<ClienteDTO> Atualizar(ClienteDTO clienteDTO);
-        Task Cancelar(long id);
         Task<ClienteDTO> ObterPorId(long id);
         Task<List<ClienteDTO>> ObterTodos();
         Task<ClienteDTO> ObterPorNome(string nomeCompleto);

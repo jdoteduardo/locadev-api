@@ -9,23 +9,24 @@ namespace Locadora.Services.DTO
     public class CarroDTO
     {
         public long Id { get; set; }
-        public string Placa { get; set; }
-        public int Ano { get; set; }
-        public string Modelo { get; set; }
-        public string Marca { get; set; }
-        public bool Ativo { get; set; }
+        public string Placa { get; private set; }
+        public int Ano { get; private set; }
+        public string Marca { get; private set; }
+        public string Modelo { get; private set; }
+        public CarroStatusEnumDTO Status { get; private set; }
+        public DateTime RegistradoEm { get; private set; }
 
         public CarroDTO()
         { }
 
-        public CarroDTO(long id, string placa, int ano, string modelo, string marca, bool ativo)
+        public CarroDTO(string placa, int ano, string marca, string modelo, CarroStatusEnumDTO status, DateTime registradoEm)
         {
-            Id = id;
             Placa = placa;
             Ano = ano;
-            Modelo = modelo;
             Marca = marca;
-            Ativo = ativo;
+            Modelo = modelo;
+            Status = status;
+            RegistradoEm = registradoEm;
         }
     }
 }
